@@ -1,15 +1,39 @@
-CC = gcc
-CFLAGS = I
-DEPS = push_swap.h
-OBJ = push_swap.o 
-%.o: %.c $(DEPS)
-		$(CC) -c -o $@ $< $(CFLAGS)
+NAME			=	push_swap
 
-push_swap: $(OBJ)
-		$(CC) -o $@ $^ $^ $(CFLAGS)
+source			=	main.c \
+					checker.c \
+					makeArray.c \
+					operations.c
 
-clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
-fclean:			clean
-				$(RM) $(NAME)
+HEAD			=	include/push_swap.h
 
+LIBFT			=	libft/libft.a
+
+OBJS			=	${addprefix source/,${source:.c=.o}}
+
+
+CC				=	gcc
+
+CFLAGS			=	-Wall -Werror -Wextra -g -I $(HEAD)
+
+.c.o			:
+					${CC} ${CFLAGS}  -c $< -o ${<:.c=.o}
+
+$(NAME)			:	${OBJS} ${LIBFT} ${HEAD}
+					${CC} ${CFLAGS} ${LD_FLAGS}  ${OBJS} -o ${NAME} $(LIBFT) 
+
+$(LIBFT)		:
+					make -C libft
+
+all				:	${NAME}
+
+clean			:
+					make fclean -C libft
+					@rm -rf ${OBJS}
+
+fclean			:	clean
+					@rm -rf ${NAME}
+
+re				:	fclean all
+
+.PHONY			:	all clean fclean re
