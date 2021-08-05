@@ -22,9 +22,11 @@ int main(int ac, char **av)
             {
                 makeArray(ac, av, &stack);
                 stack.first = stack.array[0];
+                stack.last = stack.array[ac - 2];
                 int i = 0;
         
-                ra(&stack, ac, stack.first);
+                // ra(&stack, ac, stack.first);
+                rra(&stack, ac, stack.last);
                 i = 0;
                 while (i != ac - 1)
                 {

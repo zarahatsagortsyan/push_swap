@@ -15,6 +15,7 @@ typedef struct s_stack
 {
     int *array;
     int first;
+    int last;
 }            t_stack;
 
 int         is_all_digit(char **av);
@@ -25,4 +26,5 @@ int         isDublicate(char **av);
 void        sa(t_stack *stack);
 void        makeArray(int ac, char **av, t_stack *st);
 void        ra(t_stack *stack, int ac, int first);
+void        rra(t_stack *stack, int ac, int last);
 #endif
